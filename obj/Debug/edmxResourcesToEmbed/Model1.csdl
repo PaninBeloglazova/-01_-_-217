@@ -1,0 +1,85 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="УП2Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="Login" />
+    </Key>
+    <Property Name="Login" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Role" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Права" Relationship="УП2Model.FK_User_Права" FromRole="User" ToRole="Права" />
+  </EntityType>
+  <EntityContainer Name="УП2Entities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="User" EntityType="Self.User" />
+    <EntitySet Name="sysdiagrams" EntityType="УП2Model.sysdiagrams" />
+    <EntitySet Name="Права" EntityType="УП2Model.Права" />
+    <AssociationSet Name="FK_User_Права" Association="УП2Model.FK_User_Права">
+      <End Role="Права" EntitySet="Права" />
+      <End Role="User" EntitySet="User" />
+    </AssociationSet>
+    <EntitySet Name="Name_" EntityType="УП2Model.Name_" />
+    <EntitySet Name="Title_" EntityType="УП2Model.Title_" />
+    <AssociationSet Name="FK_Name__Title_" Association="УП2Model.FK_Name__Title_">
+      <End Role="Title_" EntitySet="Title_" />
+      <End Role="Name_" EntitySet="Name_" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="Права">
+    <Key>
+      <PropertyRef Name="Role" />
+    </Key>
+    <Property Name="Role" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="User" Relationship="УП2Model.FK_User_Права" FromRole="Права" ToRole="User" />
+  </EntityType>
+  <Association Name="FK_User_Права">
+    <End Type="УП2Model.Права" Role="Права" Multiplicity="1" />
+    <End Type="УП2Model.User" Role="User" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Права">
+        <PropertyRef Name="Role" />
+      </Principal>
+      <Dependent Role="User">
+        <PropertyRef Name="Role" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="Name_">
+    <Key>
+      <PropertyRef Name="F1" />
+    </Key>
+    <Property Name="F1" Type="Int32" Nullable="false" />
+    <Property Name="Название" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="Класс_ПО" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="Дата" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Title_" Relationship="УП2Model.FK_Name__Title_" FromRole="Name_" ToRole="Title_" />
+  </EntityType>
+  <EntityType Name="Title_">
+    <Key>
+      <PropertyRef Name="Класс_ПО" />
+    </Key>
+    <Property Name="Класс_ПО" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Name_" Relationship="УП2Model.FK_Name__Title_" FromRole="Title_" ToRole="Name_" />
+  </EntityType>
+  <Association Name="FK_Name__Title_">
+    <End Type="УП2Model.Title_" Role="Title_" Multiplicity="0..1" />
+    <End Type="УП2Model.Name_" Role="Name_" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Title_">
+        <PropertyRef Name="Класс_ПО" />
+      </Principal>
+      <Dependent Role="Name_">
+        <PropertyRef Name="Класс_ПО" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

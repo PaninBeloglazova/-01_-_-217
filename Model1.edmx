@@ -1,0 +1,245 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Хранилище УП2Model" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Name$">
+          <Key>
+            <PropertyRef Name="F1" />
+          </Key>
+          <Property Name="F1" Type="int" Nullable="false" />
+          <Property Name="Название" Type="nvarchar" MaxLength="255" />
+          <Property Name="Класс ПО" Type="nvarchar" MaxLength="255" />
+          <Property Name="Дата" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="Title$">
+          <Key>
+            <PropertyRef Name="Класс ПО" />
+          </Key>
+          <Property Name="Класс ПО" Type="nvarchar" MaxLength="255" Nullable="false" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Login" />
+          </Key>
+          <Property Name="Login" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Role" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Права">
+          <Key>
+            <PropertyRef Name="Role" />
+          </Key>
+          <Property Name="Role" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Name$_Title$">
+          <End Role="Title$" Type="Self.Title$" Multiplicity="0..1" />
+          <End Role="Name$" Type="Self.Name$" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Title$">
+              <PropertyRef Name="Класс ПО" />
+            </Principal>
+            <Dependent Role="Name$">
+              <PropertyRef Name="Класс ПО" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_Права">
+          <End Role="Права" Type="Self.Права" Multiplicity="1" />
+          <End Role="User" Type="Self.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Права">
+              <PropertyRef Name="Role" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="Role" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище УП2ModelContainer">
+          <EntitySet Name="Name$" EntityType="Self.Name$" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Title$" EntityType="Self.Title$" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Права" EntityType="Self.Права" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Name$_Title$" Association="Self.FK_Name$_Title$">
+            <End Role="Title$" EntitySet="Title$" />
+            <End Role="Name$" EntitySet="Name$" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Права" Association="Self.FK_User_Права">
+            <End Role="Права" EntitySet="Права" />
+            <End Role="User" EntitySet="User" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="УП2Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Login" />
+          </Key>
+          <Property Name="Login" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Role" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Права" Relationship="УП2Model.FK_User_Права" FromRole="User" ToRole="Права" />
+        </EntityType>
+        <EntityContainer Name="УП2Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="User" EntityType="Self.User" />
+          <EntitySet Name="sysdiagrams" EntityType="УП2Model.sysdiagrams" />
+          <EntitySet Name="Права" EntityType="УП2Model.Права" />
+          <AssociationSet Name="FK_User_Права" Association="УП2Model.FK_User_Права">
+            <End Role="Права" EntitySet="Права" />
+            <End Role="User" EntitySet="User" />
+          </AssociationSet>
+          <EntitySet Name="Name_" EntityType="УП2Model.Name_" />
+          <EntitySet Name="Title_" EntityType="УП2Model.Title_" />
+          <AssociationSet Name="FK_Name__Title_" Association="УП2Model.FK_Name__Title_">
+            <End Role="Title_" EntitySet="Title_" />
+            <End Role="Name_" EntitySet="Name_" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Права">
+          <Key>
+            <PropertyRef Name="Role" />
+          </Key>
+          <Property Name="Role" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="User" Relationship="УП2Model.FK_User_Права" FromRole="Права" ToRole="User" />
+        </EntityType>
+        <Association Name="FK_User_Права">
+          <End Type="УП2Model.Права" Role="Права" Multiplicity="1" />
+          <End Type="УП2Model.User" Role="User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Права">
+              <PropertyRef Name="Role" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="Role" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Name_">
+          <Key>
+            <PropertyRef Name="F1" />
+          </Key>
+          <Property Name="F1" Type="Int32" Nullable="false" />
+          <Property Name="Название" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Класс_ПО" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Дата" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Title_" Relationship="УП2Model.FK_Name__Title_" FromRole="Name_" ToRole="Title_" />
+        </EntityType>
+        <EntityType Name="Title_">
+          <Key>
+            <PropertyRef Name="Класс_ПО" />
+          </Key>
+          <Property Name="Класс_ПО" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Name_" Relationship="УП2Model.FK_Name__Title_" FromRole="Title_" ToRole="Name_" />
+        </EntityType>
+        <Association Name="FK_Name__Title_">
+          <End Type="УП2Model.Title_" Role="Title_" Multiplicity="0..1" />
+          <End Type="УП2Model.Name_" Role="Name_" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Title_">
+              <PropertyRef Name="Класс_ПО" />
+            </Principal>
+            <Dependent Role="Name_">
+              <PropertyRef Name="Класс_ПО" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище УП2ModelContainer" CdmEntityContainer="УП2Entities">
+          <EntitySetMapping Name="User">
+            <EntityTypeMapping TypeName="УП2Model.User">
+              <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="Role" ColumnName="Role" />
+                <ScalarProperty Name="Login" ColumnName="Login" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="УП2Model.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="definition" ColumnName="definition" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Права">
+            <EntityTypeMapping TypeName="УП2Model.Права">
+              <MappingFragment StoreEntitySet="Права">
+                <ScalarProperty Name="Role" ColumnName="Role" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Name_">
+            <EntityTypeMapping TypeName="УП2Model.Name_">
+              <MappingFragment StoreEntitySet="Name$">
+                <ScalarProperty Name="Дата" ColumnName="Дата" />
+                <ScalarProperty Name="Класс_ПО" ColumnName="Класс ПО" />
+                <ScalarProperty Name="Название" ColumnName="Название" />
+                <ScalarProperty Name="F1" ColumnName="F1" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Title_">
+            <EntityTypeMapping TypeName="УП2Model.Title_">
+              <MappingFragment StoreEntitySet="Title$">
+                <ScalarProperty Name="Класс_ПО" ColumnName="Класс ПО" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

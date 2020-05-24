@@ -1,0 +1,101 @@
+﻿<Window x:Class="уП2V1.ChoseUser"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:уП2V1"
+        mc:Ignorable="d"
+        Title="ChoseUser" 
+        Height="600" 
+        Width="800" 
+        MaxHeight="600"
+        MaxWidth="800"
+        Background="Black">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="25*"/>
+            <ColumnDefinition Width="90*"/>
+            <ColumnDefinition Width="70*"/>
+            <ColumnDefinition Width="20*"/>
+            <ColumnDefinition Width="150*"/>
+            <ColumnDefinition Width="75*"/>
+            <ColumnDefinition Width="80*"/>
+            <ColumnDefinition Width="60*"/>
+            <ColumnDefinition Width="105*"/>
+            <ColumnDefinition Width="105*"/>
+            <ColumnDefinition Width="12*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="10*"/>
+            <RowDefinition Height="15*"/>
+            <RowDefinition Height="10*"/>
+            <RowDefinition Height="20*"/>
+            <RowDefinition Height="25*"/>
+            <RowDefinition Height="20*"/>
+            <RowDefinition Height="40*"/>
+            <RowDefinition Height="40*"/>
+            <RowDefinition Height="40*"/>
+            <RowDefinition Height="40*"/>
+            <RowDefinition Height="90*"/>
+            <RowDefinition Height="50*"/>
+            <RowDefinition Height="19*"/>
+        </Grid.RowDefinitions>
+        <TextBlock Grid.ColumnSpan="2" 
+                 Grid.Column="8" 
+                 HorizontalAlignment="Left" 
+                 Height="45" Grid.Row="4" 
+                 TextWrapping="Wrap" 
+                 Text="Добро пожаловать, вы вошли в личный кабинет пользователя!" 
+                 VerticalAlignment="Top" Width="198" Background="Black" Foreground="White" 
+                 AutomationProperties.IsRowHeader="True" 
+                 FontFamily="Times New Roman" 
+                 FontSize="14" 
+                 Grid.RowSpan="2" Margin="2,0,0,0" RenderTransformOrigin="0.614,0.578" />
+        <!--Текст приветсвия-->
+        <Button
+            Grid.Row="6"
+            Grid.Column="8"
+            Grid.ColumnSpan="2"
+            Margin="2,5,2,5"
+            Background="#FFEA4E4E"
+            x:Name="ОткрытьБазуДанных" Click="ОткрытьБазуДанных_Click">
+            <Viewbox
+                MaxHeight ="35">
+                <TextBlock
+                    Foreground="White"
+                    FontFamily="TimesNewRoman"
+                    Text="Открыть базу данных">
+                </TextBlock>
+            </Viewbox>
+        </Button>
+        <!--Кнопка открытия базы ПО-->
+        <Button
+            Grid.Row="7"
+            Grid.Column="8"
+            Grid.ColumnSpan="2"
+            Margin="2,5,2,5"
+            Background="#FFEA4E4E"
+            x:Name="Печать" Click="Печать_Click" >
+            <Viewbox
+                MaxHeight ="35">
+                <TextBlock
+                    Foreground="White"
+                    FontFamily="TimesNewRoman"
+                    Text="Печать">
+                </TextBlock>
+            </Viewbox>
+        </Button>
+        <!--Кнопка открытия окна для печати-->
+        <DataGrid
+                Visibility="Collapsed"
+                BorderBrush="#FFEA4E4E"
+                BorderThickness="3"
+                x:Name="DataBase"
+                Grid.Row="4"
+                Grid.RowSpan="7"
+                Grid.Column="1"
+                Grid.ColumnSpan="6"
+                Margin="0,0,10,0"/>
+        <!--Вывод базы ПО -->
+    </Grid>
+</Window>

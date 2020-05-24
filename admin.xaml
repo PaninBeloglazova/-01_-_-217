@@ -1,0 +1,192 @@
+﻿<Window x:Class="уП2V1.admin"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:уП2V1"
+        mc:Ignorable="d"
+        Title="Кабинет админа" 
+        Height="600" 
+        Width="800" 
+        MaxHeight="600"
+        MaxWidth="800"
+        Background="black">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="25"/>
+            <ColumnDefinition Width="90"/>
+            <ColumnDefinition Width="70"/>
+            <ColumnDefinition Width="20"/>
+            <ColumnDefinition Width="150"/>
+            <ColumnDefinition Width="75"/>
+            <ColumnDefinition Width="50"/>
+            <ColumnDefinition Width="150"/>
+            <ColumnDefinition Width="150"/>
+            <ColumnDefinition Width="7"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="10"/>
+            <RowDefinition Height="15"/>
+            <RowDefinition Height="10"/>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="19"/>
+            <RowDefinition Height="26"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="19"/>
+            <RowDefinition Height="0"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="19"/>
+            <RowDefinition Height="71"/>
+            <RowDefinition Height="60"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Button
+                Grid.Row="6"
+                Grid.Column="7"
+                Background="#FFEA4E4E"
+                Name="ЗарегистрироватьПользователя"
+                Margin="1,0,4,0" Grid.RowSpan="1" Click="ЗарегистрироватьПользователя_Click">
+            <TextBlock   
+                Text="Регистрация пользователя"
+                Foreground="White"
+                FontWeight="DemiBold"
+                FontFamily="TimesNewRoman" FontSize="11"
+                />
+
+        </Button>
+        <!--Кнопка добавления пользователя-->
+
+        <Button
+            Grid.Row="9"
+            Grid.Column="7"
+            Background="#FFEA4E4E"
+            Name="ОткрытьБазуДанных"
+            Grid.RowSpan="1" Grid.ColumnSpan="2" Margin="0,2,0,1" Click="ОткрытьБазуДанных_Click">
+            <TextBlock   
+                Text="Открыть базу данных"
+                Foreground="White"
+                FontWeight="DemiBold"
+                FontSize="17"
+                FontFamily="TimesNewRoman"
+            />
+        </Button>
+        <!--Кнопка открытия базы ПО-->
+
+        <DataGrid
+                Visibility="Collapsed"
+                BorderBrush="#FFEA4E4E"
+                BorderThickness="3"
+                x:Name="DataBase"
+                Grid.Row="5"
+                Grid.RowSpan="9"
+                Grid.Column="1"
+                Grid.ColumnSpan="6"
+                Margin="0,0,10,0"/>
+        <!--Вывод базы -->
+
+        <Button
+            Grid.Row="11"
+            Grid.Column="7"
+            Background="#FFEA4E4E"
+            Name="ОткрытьБазуПользователей" Margin="0,0,0,29" Grid.ColumnSpan="2" Click="ОткрытьБазуПользователей_Click">
+            <TextBlock   
+                Text="Открыть базу пользователей"
+                Foreground="White"
+                FontWeight="DemiBold"
+                FontSize="17"
+                FontFamily="TimesNewRoman"
+            />
+        </Button>
+        <!--Кнопка открытия базы пользователей-->
+
+        <DataGrid
+                Visibility="Collapsed"
+                BorderBrush="#FFEA4E4E"
+                BorderThickness="3"
+                x:Name="UsersDataBase"
+                Grid.Row="5"
+                Grid.RowSpan="9"
+                Grid.Column="1"
+                Grid.ColumnSpan="6"
+                Margin="0,0,10,0"/>
+        <!--Вывод базы пользователей-->
+
+        <TextBlock Grid.ColumnSpan="2" 
+                 Grid.Column="7" 
+                 HorizontalAlignment="Left" 
+                 Height="45" Grid.Row="4" 
+                 TextWrapping="Wrap" 
+                 Text="Добро пожаловать, вы вошли в личный кабинет администратора!" 
+                 VerticalAlignment="Top" Width="270" Background="Black" Foreground="White" 
+                 AutomationProperties.IsRowHeader="True" 
+                 FontFamily="Times New Roman" 
+                 FontSize="14" 
+                 Grid.RowSpan="2" />
+        <!--Текст приветсвия-->
+
+        <Button
+            Grid.Row="12"
+            Grid.Column="8"
+            Background="#FFEA4E4E"
+            x:Name="AddData"
+            Grid.RowSpan="1" Margin="4,0,0,23" Click="AddData_Click">
+            <TextBlock   
+                Text="Добавить данные"
+                Foreground="White"
+                FontWeight="DemiBold"
+                FontSize="17"
+                FontFamily="TimesNewRoman"
+            />
+        </Button>
+        <!--Кнопка добавления данных в БД ПО-->
+
+        <Button
+            Grid.Row="12"
+            Grid.Column="7"
+            Background="#FFEA4E4E"
+            x:Name="DelData"
+            Grid.RowSpan="1" Margin="1,0,4,23" Click="DelData_Click">
+            <TextBlock   
+                Text="Удалить данные"
+                Foreground="White"
+                FontWeight="DemiBold"
+                FontSize="17"
+                FontFamily="TimesNewRoman"
+            />
+
+        </Button>
+        <!--Кнопка удаления данных БД ПО-->
+        <Button
+            Grid.Row="13"
+            Grid.Column="7"
+            Background="#FFEA4E4E"
+            Name="импортДанных" Margin="1,0,6,8" Grid.ColumnSpan="3" Click="импортДанных_Click">
+            <TextBlock   
+                Text="Импорт данных"
+                Foreground="White"
+                FontWeight="DemiBold"
+                FontSize="17"
+                FontFamily="TimesNewRoman"
+            />
+        </Button>   <!--Кнопка импорта данных БД-->
+        <Button
+            Grid.Row="6"
+            Grid.Column="8"
+            Background="#FFEA4E4E"
+            Name="EditUserInfo"
+            Click="EditUserInfo_Click" 
+            Grid.RowSpan="1" 
+            Margin="4,0,0,0">
+            <TextBlock   
+                Text="Изменить данные пользователя"
+                Foreground="White"
+                FontWeight="DemiBold"
+                FontFamily="TimesNewRoman" FontSize="10" Width="140"
+                />
+        </Button>
+        <!--Кнопка изменения данных пользователя-->
+
+    </Grid>
+</Window>
